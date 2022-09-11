@@ -1,23 +1,18 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import GivenQuestions from './components/GivenQuestions';
+import Score from './components/Score';
+import { questions } from './constants/questions';
 
 function App() {
+  const [showScore, setShowScore] = useState(false)
+  const [rightAnswers, setRightAnswers] = useState(0)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="quiz">
+      {showScore
+        ? <Score questions={questions.length} rightAnswers={rightAnswers} />
+        : <GivenQuestions onShowScore={setShowScore} onRightAnswers={setRightAnswers} />
+      }
     </div>
   );
 }
